@@ -1,0 +1,31 @@
+:root {
+    --bg: #FAF9F6;
+    --bg-alt: #F2F0EB;
+    --ink: #14171A;
+    --ink-soft: #565D66;
+    --line: #DEDBD3;
+    --accent: #1E3A5F;
+    --accent-soft: #E8EDF3;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 118%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: 'Fraunces', 'Noto Serif KR', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  a { color: inherit; text-decoration: none; }

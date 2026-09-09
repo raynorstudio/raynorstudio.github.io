@@ -1,0 +1,46 @@
+/* -------- Responsive -------- */
+
+  @media (max-width: 680px) {
+    .nav-inner { padding: 12px 20px; gap: 14px; }
+    .brand-name { display: none; }
+    .nav-links { gap: 15px; }
+    .nav-links a { font-size: 0.79rem; }
+    .toggle-label, .year-toggle-label { display: none; }
+    .head-left { gap: 10px; }
+    section[id] { scroll-margin-top: 64px; }
+    .hero {
+      padding: 64px 0 48px;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .hero-profile { max-width: 240px; }
+    .project-item { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+    #edu-content .timeline-item { grid-template-columns: 1fr; }
+    .timeline-period { font-size: 0.82rem; }
+    .lecture-item { grid-template-columns: 1fr; gap: 4px; }
+    .detail-btn { grid-column: 1; margin-top: 10px; justify-self: start; }
+    .lecture-detail { grid-column: 1; padding: 15px 16px; }
+    .gal-item img { height: 116px; }
+    .detail-gallery.works .gal-item img { height: 140px; }
+    .detail-video { width: 100%; }
+    .lightbox { padding: 24px 12px; }
+    .lb-prev { left: 4px; }
+    .lb-next { right: 4px; }
+    .lecture-period { font-size: 0.78rem; }
+    .lecture-filter { gap: 18px; margin-bottom: 24px; }
+    .filter-btn { font-size: 0.88rem; }
+    .lecture-stats { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; }
+    .stat-num { font-size: 1.5rem; }
+    .aud-toggle-label { display: none; }
+    .aud-label { font-size: 1.02rem; }
+    .paper-row { grid-template-columns: 1fr; gap: 3px; }
+    .paper-meta { white-space: normal; }
+    .lecture-stats { gap: 18px 14px; }
+    #credentials .timeline-item { grid-template-columns: 1fr; }
+    .ref-btn { margin-top: 10px; justify-self: start; }
+    .to-top { right: 16px; bottom: 18px; gap: 5px; }
+    .to-top-circle { width: 40px; height: 40px; }
+    .to-top-circle svg { width: 17px; height: 17px; }
+    .to-top-label { font-size: 0.66rem; }
+  }
