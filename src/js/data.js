@@ -151,11 +151,11 @@ const LECTURE_MEDIA = {
 // 파일은 src/qualifications/ 아래에 두십시오.
 const QUAL_REFS = {
   jungbo: [
-    { src: 'src/qualifications/jungbo.jpg', caption: '정보처리기사 · 한국산업인력공단 (2023.03.17)' },
+    { src: 'src/qualifications/jungbo.webp', caption: '정보처리기사 · 한국산업인력공단 (2023.03.17)' },
   ],
   istqb: [
-    { src: 'src/qualifications/ISTQB1.jpg', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
-    { src: 'src/qualifications/ISTQB2.jpg', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
+    { src: 'src/qualifications/ISTQB1.webp', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
+    { src: 'src/qualifications/ISTQB2.webp', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
   ],
 };
 
