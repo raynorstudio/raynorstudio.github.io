@@ -421,29 +421,76 @@
 
   .lecture-filter {
     display: flex;
-    gap: 26px;
+    align-items: center;
+    gap: 10px;
     margin-bottom: 32px;
     flex-wrap: wrap;
   }
 
-  .filter-btn {
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    padding: 4px 0 8px;
-    font-family: 'Inter', sans-serif;
-    font-size: 0.95rem;
+  .filter-hint {
+    width: 100%;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
     color: var(--ink-soft);
-    cursor: pointer;
-    transition: color 0.15s ease, border-color 0.15s ease;
   }
 
-  .filter-btn:hover { color: var(--ink); }
+  .filter-btn {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease,
+                background 0.15s ease, box-shadow 0.2s ease;
+  }
 
-  .filter-btn.active {
+  .filter-btn:hover {
     color: var(--ink);
-    border-color: var(--accent);
+    border-color: var(--ink-soft);
+  }
+
+  .filter-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* 선택된 버튼은 검게 채워진 채로 계속 호흡합니다.
+     강도 조절: 아래 1.9s(주기)와 @keyframes 의 50% 값. */
+  .filter-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
     font-weight: 600;
+    animation: filterActivePulse 1.9s ease-in-out infinite;
+    will-change: transform, box-shadow;
+  }
+
+  @keyframes filterActivePulse {
+    0%, 100% {
+      background: var(--ink);
+      border-color: var(--ink);
+      box-shadow: 0 0 0 0 rgba(30, 58, 95, 0);
+      transform: translateY(0);
+    }
+    50% {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 6px rgba(30, 58, 95, 0.18);
+      transform: translateY(-3px);
+    }
+  }
+
+  /* 동작 최소화 설정을 켠 사용자에게는 움직임 없이 고정 */
+  @media (prefers-reduced-motion: reduce) {
+    .filter-btn.active { animation: none; }
+  }
+
+  /* 강의 항목 부제 — 공식 사업명 등 */
+  .lecture-sub {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
   }
 
   .lecture-stats {

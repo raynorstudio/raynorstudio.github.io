@@ -105,7 +105,7 @@
   <section id="lectures">
     <div class="section-head">
       <h2>강의경력</h2>
-      <div class="count">37건</div>
+      <div class="count">38건</div>
     </div>
 
     <div class="lecture-stats">
@@ -118,8 +118,8 @@
         <div class="stat-label">대학 비전공자 AI 정규과목<br>(2개 학기 연속)</div>
       </div>
       <div>
-        <div class="stat-num">20개월</div>
-        <div class="stat-label">장기 프로젝트 멘토링<br>(3건 · 5~8개월)</div>
+        <div class="stat-num">28개월</div>
+        <div class="stat-label">장기 프로젝트 멘토링<br>(4건 · 5~8개월)</div>
       </div>
       <div>
         <div class="stat-num">400시간+</div>
@@ -127,10 +127,11 @@
       </div>
     </div>
 
-    <div class="lecture-filter">
-      <button class="filter-btn active" data-filter="전체" onclick="filterLectures('전체', this)">전체(37)</button>
+    <div class="lecture-filter" id="lectureFilter">
+      <div class="filter-hint">구분을 눌러 정규수업 · 멘토링만 따로 볼 수 있습니다.</div>
+      <button class="filter-btn active" data-filter="전체" onclick="filterLectures('전체', this)">전체(38)</button>
       <button class="filter-btn" data-filter="정규수업" onclick="filterLectures('정규수업', this)">정규수업(5)</button>
-      <button class="filter-btn" data-filter="멘토링" onclick="filterLectures('멘토링', this)">멘토링(3)</button>
+      <button class="filter-btn" data-filter="멘토링" onclick="filterLectures('멘토링', this)">멘토링(4)</button>
       <button class="filter-btn" data-filter="특강" onclick="filterLectures('특강', this)">특강(29)</button>
     </div>
 
@@ -144,14 +145,14 @@
         <span class="aud-toggle"><span class="aud-toggle-label">접기</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
       </div>
       <div class="audience-body">
-        <p class="audience-note">대학 정규과목 2개 학기 연속 · 재직자 실무 과정 24시간 · 대학생 기업멘토링 5개월</p>
+        <p class="audience-note">대학 정규과목 2개 학기 연속 · 재직자 실무 과정 24시간 · 대학 캡스톤디자인 멘토링 8개월(우수상)</p>
         <div class="year-group" data-year="adult">
           <div class="year-body">
       <div class="lecture-item" data-type="특강" data-lid="2026-05080528">
       <div class="lecture-period">2026.05.08 – 05.28</div>
       <div>
         <div class="lecture-title">[한국승강기대학교]&nbsp;&nbsp;재직자 대상 AI 에이전트 실무 자동화</div>
-        <div class="lecture-tags">
+        <div class="lecture-tags"><span class="tag type">특강</span>
           <span class="tag">Codex</span><span class="tag">Antigravity</span><span class="tag">사무자동화</span>
         </div>
       </div>
@@ -170,6 +171,14 @@
         <div class="lecture-tags"><span class="tag type">정규수업</span><span class="tag">AI 개론</span><span class="tag">Pytorch</span></div>
       </div>
     </div>
+      <div class="lecture-item" data-type="멘토링" data-lid="2025-09122026-0519">
+      <div class="lecture-period">2025.09.12 – 2026.05.19</div>
+      <div>
+        <div class="lecture-title">[대구가톨릭대학교 AI·DX혁신인재사업단]&nbsp;&nbsp;캡스톤디자인 프로젝트 대학 멘토링</div>
+        <div class="lecture-sub">지역혁신중심 대학지원체계(RISE) 정책사업 · K-IDEA VALLEY 프로젝트: 현장실무형 고급인재양성</div>
+        <div class="lecture-tags"><span class="tag type">멘토링</span><span class="tag">Unity</span><span class="tag">Immersal SDK</span><span class="tag">AR</span><span class="tag">Nest.js</span><span class="tag">React</span><span class="tag">Supabase</span></div>
+      </div>
+    </div>
       <div class="lecture-item" data-type="멘토링" data-lid="2022-07011130">
       <div class="lecture-period">2022.07.01 – 11.30</div>
       <div>
@@ -181,21 +190,21 @@
       <div class="lecture-period">2023.01.09 – 01.13</div>
       <div>
         <div class="lecture-title">[대구가톨릭대학교]&nbsp;&nbsp;SW인재양성사업 Git 기초 및 Java 문법 교육</div>
-        <div class="lecture-tags"><span class="tag">Git</span><span class="tag">Java</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Git</span><span class="tag">Java</span></div>
       </div>
     </div>
       <div class="lecture-item" data-type="특강" data-lid="2022-03210428">
       <div class="lecture-period">2022.03.21 – 04.28</div>
       <div>
         <div class="lecture-title">[대구가톨릭대학교]&nbsp;&nbsp;SW·AI 오픈소스 단기강좌 C프로그래밍</div>
-        <div class="lecture-tags"><span class="tag">C</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">C</span></div>
       </div>
     </div>
       <div class="lecture-item" data-type="특강" data-lid="2019-1113">
       <div class="lecture-period">2019.11.13</div>
       <div>
         <div class="lecture-title">[대구가톨릭대학교]&nbsp;&nbsp;비전공자 대상 블록코딩 교육</div>
-        <div class="lecture-tags"><span class="tag">앱인벤터</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">앱인벤터</span></div>
       </div>
     </div>
           </div>
@@ -228,14 +237,14 @@
       <div class="lecture-period">07.28 – 07.30</div>
       <div>
         <div class="lecture-title">[대구 동부고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2026-07090713">
       <div class="lecture-period">07.09 – 07.13</div>
       <div>
         <div class="lecture-title">[대구 화원고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="정규수업" data-lid="2026-04151217">
@@ -261,21 +270,21 @@
       <div class="lecture-period">10.14</div>
       <div>
         <div class="lecture-title">[칠곡 북삼고등학교]&nbsp;&nbsp;피지컬 컴퓨팅 아두이노 기초</div>
-        <div class="lecture-tags"><span class="tag">Arduino</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Arduino</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2025-09081101">
       <div class="lecture-period">09.08 – 11.01</div>
       <div>
         <div class="lecture-title">[칠곡 북삼고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">PyTorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2025-07230823">
       <div class="lecture-period">07.23 – 08.23</div>
       <div>
         <div class="lecture-title">[포항 대도중학교]&nbsp;&nbsp;생성형 AI 기반 바이브코딩 앱 구현</div>
-        <div class="lecture-tags"><span class="tag">Codex</span><span class="tag">HTML/CSS/JS</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Codex</span><span class="tag">HTML/CSS/JS</span></div>
       </div>
     </div>
         </div>
@@ -294,105 +303,105 @@
       <div class="lecture-period">10.16 – 10.25</div>
       <div>
         <div class="lecture-title">[대구 동부고등학교]&nbsp;&nbsp;강화학습 기반 2D 게임 구현</div>
-        <div class="lecture-tags"><span class="tag">Pygame</span><span class="tag">PyTorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Pygame</span><span class="tag">PyTorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-08291026">
       <div class="lecture-period">08.29 – 10.26</div>
       <div>
         <div class="lecture-title">[포항 대도중학교]&nbsp;&nbsp;2D Top-View 게임 구현</div>
-        <div class="lecture-tags"><span class="tag">Pygame</span><span class="tag">Ursina</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Pygame</span><span class="tag">Ursina</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-08271030">
       <div class="lecture-period">08.27 – 10.30</div>
       <div>
         <div class="lecture-title">[경산 삼성현중학교]&nbsp;&nbsp;블록코딩 교육</div>
-        <div class="lecture-tags"><span class="tag">스크래치</span><span class="tag">엔트리</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">스크래치</span><span class="tag">엔트리</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-07240725">
       <div class="lecture-period">07.24 – 07.25</div>
       <div>
         <div class="lecture-title">[포항 대도중학교]&nbsp;&nbsp;블록코딩 퀴즈게임 구현</div>
-        <div class="lecture-tags"><span class="tag">앱인벤터</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">앱인벤터</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-06040606">
       <div class="lecture-period">06.04 – 06.06</div>
       <div>
         <div class="lecture-title">[경산 과학고등학교]&nbsp;&nbsp;Flutter 모바일 앱 제작</div>
-        <div class="lecture-tags"><span class="tag">Flutter</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Flutter</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-05280531">
       <div class="lecture-period">05.28 – 05.31</div>
       <div>
         <div class="lecture-title">[대구 동부고등학교]&nbsp;&nbsp;파이썬 기초</div>
-        <div class="lecture-tags"><span class="tag">Python</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Python</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-05130515">
       <div class="lecture-period">05.13 – 05.15</div>
       <div>
         <div class="lecture-title">[경산 경산과학고등학교]&nbsp;&nbsp;반응형 웹 포트폴리오 제작</div>
-        <div class="lecture-tags"><span class="tag">HTML/CSS/JS</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">HTML/CSS/JS</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-05110601">
       <div class="lecture-period">05.11 – 06.01</div>
       <div>
         <div class="lecture-title">[구미 형곡중학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">Mediapipe</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">Mediapipe</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-05080510">
       <div class="lecture-period">05.08 – 05.10</div>
       <div>
         <div class="lecture-title">[대구 동부고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-04171031">
       <div class="lecture-period">04.17 – 10.31</div>
       <div>
         <div class="lecture-title">[경산 진량고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-04050927">
       <div class="lecture-period">04.05 – 09.27</div>
       <div>
         <div class="lecture-title">[김천 성의여자고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-04030710">
       <div class="lecture-period">04.03 – 07.10</div>
       <div>
         <div class="lecture-title">[경산 사동고등학교]&nbsp;&nbsp;Flutter 모바일 앱 제작</div>
-        <div class="lecture-tags"><span class="tag">Flutter</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Flutter</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-04010403">
       <div class="lecture-period">04.01 – 04.03</div>
       <div>
         <div class="lecture-title">[대구 영남공업고등학교]&nbsp;&nbsp;블록코딩 교육</div>
-        <div class="lecture-tags"><span class="tag">스크래치</span><span class="tag">엔트리</span><span class="tag">앱인벤터</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">스크래치</span><span class="tag">엔트리</span><span class="tag">앱인벤터</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-03120719">
       <div class="lecture-period">03.12 – 07.19</div>
       <div>
         <div class="lecture-title">[경산 삼성현중학교]&nbsp;&nbsp;블록코딩 교육</div>
-        <div class="lecture-tags"><span class="tag">스크래치</span><span class="tag">엔트리</span><span class="tag">앱인벤터</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">스크래치</span><span class="tag">엔트리</span><span class="tag">앱인벤터</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2024-02190221">
       <div class="lecture-period">02.19 – 02.21</div>
       <div>
         <div class="lecture-title">[경산 경산과학고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">Pytorch</span></div>
       </div>
     </div>
         </div>
@@ -411,7 +420,7 @@
       <div class="lecture-period">10.28 – 11.18</div>
       <div>
         <div class="lecture-title">[칠곡 북삼고등학교]&nbsp;&nbsp;Vision AI 전공맞춤형 공학 프로젝트</div>
-        <div class="lecture-tags"><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">PyTorch</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">OpenCV</span><span class="tag">mediapipe</span><span class="tag">PyTorch</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="정규수업" data-lid="2023-08010204">
@@ -425,21 +434,21 @@
       <div class="lecture-period">07.11 – 07.12</div>
       <div>
         <div class="lecture-title">[대구 동부고등학교]&nbsp;&nbsp;2D Top-View 게임 구현</div>
-        <div class="lecture-tags"><span class="tag">Python</span><span class="tag">Pygame</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Python</span><span class="tag">Pygame</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2023-05270603">
       <div class="lecture-period">05.27 – 06.03</div>
       <div>
         <div class="lecture-title">[문경여자고등학교] 아두이노 스마트팜 구현 교육</div>
-        <div class="lecture-tags"><span class="tag">Arduino</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Arduino</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="특강" data-lid="2023-05080701">
       <div class="lecture-period">05.08 – 07.01</div>
       <div>
         <div class="lecture-title">[경산고등학교]&nbsp;&nbsp;2D Top-View 게임 구현</div>
-        <div class="lecture-tags"><span class="tag">Python</span><span class="tag">Pygame</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">Python</span><span class="tag">Pygame</span></div>
       </div>
     </div>
           <div class="lecture-item" data-type="멘토링" data-lid="2023-04131117">
@@ -479,7 +488,7 @@
       <div class="lecture-period">11.25</div>
       <div>
         <div class="lecture-title">[대구 대건고등학교]&nbsp;&nbsp;나만의 웹 포트폴리오 만들기</div>
-        <div class="lecture-tags"><span class="tag">HTML/CSS/JS</span></div>
+        <div class="lecture-tags"><span class="tag type">특강</span><span class="tag">HTML/CSS/JS</span></div>
       </div>
     </div>
         </div>
