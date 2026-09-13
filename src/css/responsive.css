@@ -41,6 +41,13 @@
     .lecture-stats { gap: 18px 14px; }
     #credentials .timeline-item { grid-template-columns: 1fr; }
     .ref-btn { margin-top: 10px; justify-self: start; }
+    #edu-content .timeline-item,
+    #research .timeline-item,
+    #papers .timeline-item { grid-template-columns: 1fr; }
+    .paper-row.has-detail { grid-template-columns: 1fr; }
+    .dpaper { grid-template-columns: 1fr; gap: 3px; }
+    .timeline-item .detail-btn,
+    .paper-row .detail-btn { grid-column: 1; margin-top: 10px; justify-self: start; }
     .to-top { right: 16px; bottom: 18px; gap: 5px; }
     .to-top-circle { width: 40px; height: 40px; }
     .to-top-circle svg { width: 17px; height: 17px; }

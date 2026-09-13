@@ -139,27 +139,117 @@ const LECTURE_DETAILS = {
 const DETAIL_KEYS = Object.keys(LECTURE_DETAILS);
 
 
-// 강의 회차별 사진·영상 — 같은 특강명이라도 회차마다 다르므로 data-lid 로 구분합니다.
-// 이 블록은 compress_images.py 가 자동으로 생성해 줍니다.
-//   onsite / works : "경로" 또는 { src: "경로", caption: "설명" }
-//   videos         : "유튜브ID" 또는 { id: "유튜브ID", caption: "설명" }
-const LECTURE_MEDIA = {
-  // "2026-07280730": { onsite: ["src/img/lectures/2026-07280730/01.jpg"] },
+// ---------------------------------------------------------------
+// 항목별 상세 — 강의뿐 아니라 콘텐츠·연구과제·논문·자격에도 씁니다.
+//
+// 키는 HTML 의 data-lid 값입니다. 해당 항목에 "자세히" 버튼이 붙고,
+// 눌렀을 때 아래 내용이 펼쳐집니다. 키가 없으면 버튼도 없습니다.
+//
+//   summary : 문단 배열. 한 줄이 한 문단
+//   works   : 결과물 사진   "경로" 또는 { src, caption }
+//   onsite  : 현장 사진     "경로" 또는 { src, caption }
+//   images  : 분류 없는 사진(자격증·증빙 등). works/onsite 와 같은 형식
+//   papers  : 논문 목록  { date, title, role, venue, tags }
+//   videos  : "유튜브ID" 또는 { id, caption }
+//   links   : { label, url } 배열
+//
+// 강의 회차별 사진은 compress_images.py 가 이 객체에 자동으로 채워 줍니다.
+// ---------------------------------------------------------------
+const ITEM_DETAILS = {
+
+  // ===== 자격 · 직업훈련 =====
+  // thumb 는 선택 사항입니다. 넣어 두면 원본이 오기 전에 먼저 떠서 기다림이 느껴지지 않습니다.
+  'cert-gisa': {
+    images: [
+      { src: 'src/qualifications/jungbo.webp',
+        thumb: 'src/qualifications/thumb/jungbo.webp',
+        caption: '정보처리기사 · 한국산업인력공단' },
+    ],
+  },
+  'cert-istqb': {
+    images: [
+      { src: 'src/qualifications/ISTQB1.webp',
+        thumb: 'src/qualifications/thumb/ISTQB1.webp',
+        caption: 'ISTQB CTFL 자격증' },
+      { src: 'src/qualifications/ISTQB2.webp',
+        thumb: 'src/qualifications/thumb/ISTQB2.webp',
+        caption: 'KSTQB 합격 통지' },
+    ],
+  },
+
+  // ===== 교육 콘텐츠 개발 · 운영 =====
+  // 'edu-flip-2023': {
+  //   summary: ['대학 정규과목의 사전학습 영상을 직접 기획·촬영·편집했습니다.'],
+  //   works: ['src/img/edu/flip/01.jpg'],
+  //   videos: ['유튜브ID'],
+  // },
+
+  // ===== 참여 사업 · 연구 과제 =====
+  // papers : 해당 과제에서 나온 논문.  { date, title, role, venue, tags }
+  'res-o2o': {
+    papers: [
+      { date: '2022.08', title: '지역문화 콘텐츠 활용을 위한 공공 스마트쉘터 기반 웹 서비스 시스템 설계 및 구현',
+        role: '석사학위논문', venue: '대구가톨릭대학교', tags: ['웹 서비스', '스마트쉘터'] },
+      { date: '2022.06', title: '디지털 사이니지 기반 커뮤니티 시스템 설계 · 구현',
+        role: '3저자', venue: '한국정보과학회 KCC', tags: ['디지털 사이니지'] },
+      { date: '2022.06', title: '디지털 사이니지 갤러리 시스템 설계 · 구현',
+        role: '3저자', venue: '한국정보과학회 KCC', tags: ['디지털 사이니지'] },
+      { date: '2021.12', title: '콘텐츠 제공을 위한 디지털 사이니지 시스템',
+        role: '2저자', venue: '한국정보과학회', tags: ['디지털 사이니지'] },
+    ],
+  },
+
+  'res-gauge': {
+    papers: [
+      { date: '2020.12', title: 'Tesseract-OCR을 이용한 아날로그 계기판 숫자 인식',
+        role: '1저자', venue: '한국정보과학회 KSC', tags: ['OCR', 'Tesseract'] },
+      { date: '2020.01', title: 'Automatic Reading Analog gauge with Handheld device',
+        role: '1저자', venue: 'IEEE ICCE (국제)', tags: ['OCR', '모바일 비전'] },
+    ],
+  },
+
+  'res-drone': {
+    papers: [
+      { date: '2021.06', title: '항공 영상 내 오브젝트 면적 측정 외곽선 검출',
+        role: '4저자', venue: '정보과학회 컴퓨팅의 실제 논문지', tags: ['항공영상', '외곽선 검출'] },
+      { date: '2021.06', title: '항공 영상 포트홀 탐지 CNN 모델 성능 비교 분석',
+        role: '4저자', venue: '한국정보과학회 KCC', tags: ['CNN', '포트홀 탐지'] },
+      { date: '2020.12', title: '항공 영상 포트홀 탐지 병렬 추론 모델 정확도 향상',
+        role: '3저자', venue: '한국정보과학회 KSC', tags: ['병렬 추론', '포트홀 탐지'] },
+      { date: '2020.07', title: 'R-CNN 기반 포트홀 탐지 웹 서비스 시스템',
+        role: '4저자', venue: '한국정보과학회 KSC', tags: ['R-CNN', '웹 서비스'] },
+      { date: '2020.06', title: 'Pothole Detection Result Management System',
+        role: '3저자', venue: 'JP Journal of Heat and Mass Transfer (Scopus)', tags: ['Scopus', '포트홀 탐지'] },
+    ],
+  },
+
+  'res-dataset': {
+    papers: [
+      { date: '2021.06', title: '잘못된 어노테이션 제거기법 활용 딥러닝 학습용 이미지 데이터셋 구축 시스템',
+        role: '1저자', venue: '한국정보과학회 KSC', tags: ['데이터셋', '어노테이션'] },
+      { date: '2020.07', title: '게시판 크롤링 선호도 기반 게시물 푸시 서비스',
+        role: '3저자', venue: '한국정보과학회 KSC', tags: ['크롤링', '추천'] },
+      { date: '2019.11', title: '데이터셋 생성을 위한 이미지 URI 및 메타데이터 수집 크롤러',
+        role: '4저자', venue: '한국정보처리학회 추계', tags: ['크롤러', '메타데이터'] },
+    ],
+  },
+
 };
 
-// 자격 증빙 이미지 — 레퍼런스 버튼을 누르면 라이트박스로 열립니다.
-// 파일은 src/qualifications/ 아래에 두십시오.
-const QUAL_REFS = {
-  jungbo: [
-    { src: 'src/qualifications/jungbo.webp', caption: '정보처리기사 · 한국산업인력공단 (2023.03.17)' },
-  ],
-  istqb: [
-    { src: 'src/qualifications/ISTQB1.webp', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
-    { src: 'src/qualifications/ISTQB2.webp', caption: 'ISTQB CTFL · KSTQB (2018.12.28)' },
-  ],
-};
+// 화면이 한가할 때 미리 받아 둘 이미지.
+//
+// 여기에 넣은 것은 페이지를 열 때마다 내려받습니다.
+// 자격 증빙처럼 장수가 적고 자주 눌리는 것만 넣으십시오.
+// 강의 사진은 넣지 마십시오 — 38건 × 여러 장이면 수십 MB 가 됩니다.
+// 강의 사진은 항목을 펼칠 때 썸네일만 받고, 크게 볼 때 원본을 받습니다.
+const PRELOAD_IMAGES = [].concat(
+  ITEM_DETAILS['cert-gisa'].images,
+  ITEM_DETAILS['cert-istqb'].images,
+).map(x => (typeof x === 'string' ? x : x.src));
 
-function openRefs(key) {
-  const list = QUAL_REFS[key];
-  if (list && list.length) openLightbox(list, 0);
+// 자격 항목의 "레퍼런스" 버튼 — ITEM_DETAILS 의 images 를 바로 크게 띄웁니다.
+function openRefs(lid) {
+  const d = ITEM_DETAILS[lid];
+  if (!d || !d.images || !d.images.length) return;
+  openLightbox(d.images.map(x => (typeof x === 'string' ? { src: x, caption: '' } : x)), 0);
 }

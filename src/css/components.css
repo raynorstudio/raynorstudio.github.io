@@ -737,3 +737,140 @@
     color: var(--ink-soft);
     white-space: nowrap;
   }
+
+/* -------- 상세 펼침 — 강의 외 섹션 공통 -------- */
+
+  /* 자세히 버튼이 붙는 항목은 3열 그리드가 필요합니다 */
+  #edu-content .timeline-item,
+  #research .timeline-item,
+  #papers .timeline-item {
+    grid-template-columns: 11.5rem 1fr auto;
+  }
+
+  #research .timeline-item,
+  #papers .timeline-item { grid-template-columns: 8.5rem 1fr auto; }
+
+  .timeline-item.has-detail,
+  .paper-row.has-detail { cursor: pointer; }
+
+  .timeline-item.has-detail:hover,
+  .paper-row.has-detail:hover { background: var(--bg-alt); }
+
+  .timeline-item.has-detail:hover .detail-btn,
+  .paper-row.has-detail:hover .detail-btn {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .timeline-item.open .detail-btn,
+  .paper-row.open .detail-btn {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  .timeline-item.open .detail-btn svg,
+  .paper-row.open .detail-btn svg { transform: rotate(180deg); }
+
+  .paper-row.has-detail { grid-template-columns: 5.2rem 1fr auto auto; }
+
+  .detail-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .detail-link {
+    display: inline-block;
+    padding: 6px 13px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    transition: border-color 0.15s ease;
+  }
+
+  .detail-link:hover { border-color: var(--accent); }
+
+/* -------- 이미지 로딩 표시 -------- */
+
+  .lightbox.is-loading img {
+    filter: blur(6px);
+    transition: filter 0.15s ease;
+  }
+
+  .lightbox img { transition: filter 0.15s ease; }
+
+  .lightbox::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 3px solid rgba(255, 255, 255, 0.28);
+    border-top-color: #fff;
+    border-radius: 50%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  .lightbox.is-loading::after {
+    opacity: 1;
+    animation: lbSpin 0.8s linear infinite;
+  }
+
+  @keyframes lbSpin { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lightbox.is-loading::after { animation: none; }
+    .lightbox.is-loading img { filter: none; }
+  }
+
+/* -------- 과제 안의 논문 목록 -------- */
+
+  .tag.paper-count {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+  }
+
+  .detail-papers { margin-top: 4px; }
+
+  .dpaper {
+    display: grid;
+    grid-template-columns: 4.8rem 1fr;
+    gap: 14px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .dpaper:first-child { border-top: none; padding-top: 4px; }
+
+  .dpaper-date {
+    color: var(--ink-soft);
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
+
+  .dpaper-title {
+    font-size: 0.93rem;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .dpaper-meta {
+    margin-top: 3px;
+    font-size: 0.81rem;
+    color: var(--ink-soft);
+  }
+
+  .dpaper-tags {
+    margin-top: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }

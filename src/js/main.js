@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   const defaultBtn = document.querySelector('#lectures .filter-btn[data-filter="전체"]');
   if (defaultBtn) filterLectures('전체', defaultBtn);
-  initLectureDetails();
+  initItemDetails();
   initToTop();
+  preloadDetailImages();
 });

@@ -1,4 +1,4 @@
-// 강의 항목 상세 펼침 — 개요·사진·영상 조립
+// 항목 상세 펼침 — 강의 · 콘텐츠 · 연구과제 · 논문 · 자격 공통
 
 // 제목에서 공백을 제거해 비교 (마크다운 키와 HTML 제목의 공백 차이 흡수)
 const norm = s => s.replace(/\s+/g, '');
@@ -12,6 +12,7 @@ function findDetail(title) {
 }
 
 // 문자열 또는 { src, caption } 둘 다 허용
+// { src, thumb, caption } 또는 문자열.  thumb 는 목록에 쓰는 작은 이미지입니다.
 function normPhoto(p) { return typeof p === 'string' ? { src: p, caption: '' } : p; }
 function normVideo(v) { return typeof v === 'string' ? { id: v, caption: '' } : v; }
 
@@ -33,9 +34,11 @@ function buildGallery(list, label, cls) {
     fig.className = 'gal-item';
 
     const img = document.createElement('img');
-    img.src = p.src;
+    // 목록에는 썸네일을, 크게 볼 때만 원본을 씁니다
+    img.src = p.thumb || p.src;
     img.alt = p.caption || label;
     img.loading = 'lazy';
+    img.decoding = 'async';
     img.addEventListener('click', () => openLightbox(items, i));
     fig.appendChild(img);
 
@@ -89,9 +92,76 @@ function buildVideos(list) {
   return block;
 }
 
+function buildPapers(list) {
+  const block = document.createElement('div');
+  block.className = 'detail-block';
+  block.innerHTML = '<div class="detail-label">이 과제에서 나온 논문 ' + list.length + '편</div>';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'detail-papers';
+
+  list.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'dpaper';
+
+    const date = document.createElement('div');
+    date.className = 'dpaper-date';
+    date.textContent = p.date || '';
+
+    const body = document.createElement('div');
+
+    const title = document.createElement('div');
+    title.className = 'dpaper-title';
+    title.textContent = p.title;
+    body.appendChild(title);
+
+    const meta = document.createElement('div');
+    meta.className = 'dpaper-meta';
+    meta.textContent = [p.role, p.venue].filter(Boolean).join('  ·  ');
+    body.appendChild(meta);
+
+    if (p.tags && p.tags.length) {
+      const tags = document.createElement('div');
+      tags.className = 'dpaper-tags';
+      p.tags.forEach(x => {
+        const t = document.createElement('span');
+        t.className = 'tag';
+        t.textContent = x;
+        tags.appendChild(t);
+      });
+      body.appendChild(tags);
+    }
+
+    row.appendChild(date);
+    row.appendChild(body);
+    wrap.appendChild(row);
+  });
+
+  block.appendChild(wrap);
+  return block;
+}
+
+function buildLinks(list) {
+  const block = document.createElement('div');
+  block.className = 'detail-block detail-links';
+  list.forEach(l => {
+    const a = document.createElement('a');
+    a.href = l.url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'detail-link';
+    a.textContent = l.label + ' \u2197';
+    block.appendChild(a);
+  });
+  return block;
+}
+
 function buildDetail(d, media) {
   const wrap = document.createElement('div');
   wrap.className = 'lecture-detail';
+
+  // 항목별 개요가 있으면 그것을, 없으면 제목 기준 공용 개요를 씁니다
+  if (media && media.summary) d = media;
 
   if (d && d.summary) {
     const sum = document.createElement('div');
@@ -106,9 +176,12 @@ function buildDetail(d, media) {
 
   // 사진·영상은 회차별 데이터에서 가져옵니다. 없는 그룹은 그리지 않습니다.
   const m = media || {};
+  if (m.papers && m.papers.length) wrap.appendChild(buildPapers(m.papers));
   if (m.videos && m.videos.length) wrap.appendChild(buildVideos(m.videos));
+  if (m.images && m.images.length) wrap.appendChild(buildGallery(m.images, '증빙 자료', 'works'));
   if (m.works && m.works.length) wrap.appendChild(buildGallery(m.works, '결과물', 'works'));
   if (m.onsite && m.onsite.length) wrap.appendChild(buildGallery(m.onsite, '수업 현장', 'onsite'));
+  if (m.links && m.links.length) wrap.appendChild(buildLinks(m.links));
 
   return wrap;
 }
@@ -117,7 +190,7 @@ function toggleDetail(item) {
   const open = item.classList.contains('open');
 
   // 하나만 열리도록 나머지는 닫습니다
-  document.querySelectorAll('#lectures .lecture-item.open').forEach(other => {
+  document.querySelectorAll('.has-detail.open').forEach(other => {
     other.classList.remove('open');
     const d = other.querySelector('.lecture-detail');
     if (d) d.remove();
@@ -136,22 +209,33 @@ function toggleDetail(item) {
   item._btn.setAttribute('aria-expanded', 'true');
 }
 
-// 상세 정보가 있는 특강 항목에 펼침 기능 연결
-function initLectureDetails() {
-  // 구분과 무관하게, 개요 데이터가 있는 항목이면 버튼을 붙입니다
-  document.querySelectorAll('#lectures .lecture-item').forEach(item => {
-    const titleEl = item.querySelector('.lecture-title');
-    if (!titleEl) return;
+// 항목 하나의 상세 데이터를 모읍니다.
+//   data.js  (ITEM_DETAILS)    — 손으로 쓴 설명 · 논문 · 링크 · 자격 증빙
+//   media.js (GENERATED_MEDIA) — build_media.py 가 폴더를 훑어 만든 사진 · 영상
+// 같은 항목이 양쪽에 있으면 손으로 쓴 쪽을 우선합니다.
+function mediaFor(lid) {
+  const hand = (typeof ITEM_DETAILS !== 'undefined' && ITEM_DETAILS[lid]) || null;
+  const auto = (typeof GENERATED_MEDIA !== 'undefined' && GENERATED_MEDIA[lid]) || null;
+  if (!hand && !auto) return null;
+  return Object.assign({}, auto, hand);
+}
 
-    const d = findDetail(titleEl.textContent);          // 개요 (특강명 기준, 공유)
-    const media = LECTURE_MEDIA[item.dataset.lid];      // 사진·영상 (회차별)
-    if (!d && !media) return;                           // 보여줄 게 없으면 버튼도 없음
+// data-lid 가 있는 모든 항목에 펼침 기능을 연결합니다.
+// 강의·콘텐츠·연구과제·논문·자격 어느 섹션이든 동일하게 동작합니다.
+function initItemDetails() {
+  document.querySelectorAll('[data-lid]').forEach(item => {
+    // 자격 섹션은 별도의 "레퍼런스" 버튼으로 바로 띄우므로 제외합니다
+    if (item.closest('#credentials')) return;
 
-    item._detail = d;
+    const titleEl = item.querySelector('.lecture-title, .timeline-role, .paper-title');
+    const detail = titleEl ? findDetail(titleEl.textContent) : null;  // 제목 기준 공용 개요
+    const media = mediaFor(item.dataset.lid);                         // 항목 고유 데이터
+    if (!detail && !media) return;                                    // 보여줄 게 없으면 버튼도 없음
+
+    item._detail = detail;
     item._media = media;
     item.classList.add('has-detail');
 
-    // 눈에 보이는 버튼 — 클릭 가능하다는 신호
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'detail-btn';
@@ -163,7 +247,6 @@ function initLectureDetails() {
     item.appendChild(btn);
     item._btn = btn;
 
-    // 행 어디를 눌러도 열리되, 사진·영상 클릭은 방해하지 않도록 제한
     item.addEventListener('click', e => {
       if (e.target.closest('.lecture-detail')) return;
       toggleDetail(item);
@@ -172,4 +255,13 @@ function initLectureDetails() {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDetail(item); }
     });
   });
+}
+
+// 자주 눌리는 이미지를 화면이 한가할 때 미리 받아 둡니다.
+// 한꺼번에 요청하지 않고 한 장씩 순서대로 받습니다.
+// PRELOAD_IMAGES 는 data.js 에서 관리합니다. 여기에 많이 넣지 마십시오.
+function preloadDetailImages() {
+  const run = () => warmSequential(PRELOAD_IMAGES);
+  if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 3000 });
+  else setTimeout(run, 1200);
 }
